@@ -56,7 +56,8 @@ Here are the relevant columns of the processed dataframe:
 
 
 This is the first few rows of my cleaned dataset:
-<!-- TODO -->
+print(recipes_cleaned.head().to_markdown(index=False))
+
 
 
 
