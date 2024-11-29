@@ -90,24 +90,34 @@ Descriptions are often provided when the contributor has something notable or sp
 We conducted permutation tests to evaluate whether the missingness in the avg_rating column depends on the `calories` and `sodium` columns in our dataset. The permutation tests simulate the null hypothesis that there is no relationship between the missingness in avg_rating and the respective column by randomly shuffling the data and recalculating the test statistic.
 
 
-*Testing Dependency on calories:*
-*Null Hypothesis:* The missingness of `avg_rating` does not depend on `calories`.
-*Alternative Hypothesis:* The missingness of `avg_rating` depends on `calories`.
-*Test Statistic:* Absolute difference in mean `calories` between groups with and without missing `avg_rating`.
-*Results:* Observed Difference: 102.607, P-value: 0.0
+**Testing Dependency on calories:**
+
+**Null Hypothesis:** The missingness of `avg_rating` does not depend on `calories`.
+
+**Alternative Hypothesis:** The missingness of `avg_rating` depends on `calories`.
+
+**Test Statistic:** Absolute difference in mean `calories` between groups with and without missing `avg_rating`.
+
+**Results:** Observed Difference: 102.607, P-value: 0.0
 
 The histogram below shows the empirical distribution of the test statistic for the permutation test on calories. The observed statistic is marked with a red dashed line. The observed difference falls outside the bulk of the permutation differences, suggesting that there is a significant dependency of the missingness of avg_rating on the calories column.
+<iframe src="assets/cal_missing.html" width="800" height="600" frameborder="0" ></iframe>
 
 
-*Testing Dependency on sodium:*
-*Null Hypothesis:* The missingness of `avg_rating` does not depend on `sodium`.
-*Alternative Hypothesis:* The missingness of `avg_rating` depends on `sodium`.
-*Test Statistic:* Absolute difference in mean `sodium` between groups with and without missing `avg_rating`.
-*Results:* Observed Difference: -0.232, P-value: 0.903
+**Testing Dependency on sodium:**
+
+**Null Hypothesis:** The missingness of `avg_rating` does not depend on `sodium`.
+
+**Alternative Hypothesis:** The missingness of `avg_rating` depends on `sodium`.
+
+**Test Statistic:** Absolute difference in mean `sodium` between groups with and without missing `avg_rating`.
+
+**Results:** Observed Difference: -0.232, P-value: 0.903
 
 The histogram below shows the empirical distribution of the test statistic under the null hypothesis. The observed difference, marked by the red dashed line, lies well within the bulk of the null distribution, suggesting no significant dependency between the missingness in avg_rating and the sodium column. Therefore, we fail to reject the null hypothesis for sodium.
+<iframe src="assets/sodium_missing.html" width="800" height="600" frameborder="0" ></iframe>
 
-*Based on the results of the permutation tests:*
+**Based on the results of the permutation tests:**
 The missingness in `avg_rating` is significantly dependent on `calories` however, there was no significant dependency between the missingness in `avg_rating` and `sodium`.
 
 
