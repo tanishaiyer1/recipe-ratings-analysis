@@ -69,7 +69,7 @@ This is the first few rows of my cleaned dataset:
 
 ### Univariate Analysis
 Here is a plot that displays the distribution of average recipe ratings:
-<iframe src="/Users/tanishaiyer/Documents/DSC/recipe-ratings-analysis/assets/univariate.html" width="800" height="600" frameborder="0" ></iframe>
+<iframe src="assets/univariate.html" width="800" height="600" frameborder="0" ></iframe>
 
 The histogram shows the distribution of average recipe ratings. Most recipes have an average rating of 4 or higher, indicating that users generally rate recipes quite positively. The mode of the distribution is at a rating of 5, suggesting that a significant number of recipes receive the highest possible rating.
 
@@ -77,6 +77,7 @@ The histogram shows the distribution of average recipe ratings. Most recipes hav
 
 ### Bivariate Analysis
 Here is a plot that displays the relationship between calories and average ratings:
+<iframe src="assets/bivar_cals.html" width="800" height="600" frameborder="0" ></iframe>
 
 The scatter plot illustrates the relationship between the number of calories and the average ratings of recipes. While there is some spread in the data, there does not appear to be a strong correlation between calories and average ratings. Recipes with a wide range of calorie content can still achieve high ratings, suggesting that factors other than calorie count may play a more significant role in user ratings.
 
