@@ -33,7 +33,7 @@ We are working with two datasets for this project. The first, 'Recipes', contain
 
 
 ## Data Cleaning and Exploratory Data Analysis
-We first had to clean the raw data. We started by merging the two datasets on id and recipe_id. We then handled all missing rating by replacing all zero ratings with NaN values. Next we Converted the nutrition column from a string representation of a list to individual numerical columns for each nutrient and then removed the original nutrition column. We also calculated the average rating for each recipe and added it as a new column. Next we added binary indicators for the presence of vegetables (has_veggies) and whether the recipe is tagged as healthy (is_healthy). Finally, we identified and removed duplicate entries based on the recipe ID to avoid redundant analyses. Our analysis is focused on the avg_rating column so removing the duplicate id's doesn't loose any relevant data.
+We first had to clean the raw data. We started by merging the two datasets on id and recipe_id. We then handled all missing rating by replacing all zero ratings with NaN values. Next we Converted the nutrition column from a string representation of a list to individual numerical columns for each nutrient and then removed the original nutrition column. We also calculated the average rating for each recipe and added it as a new column. Next we added binary indicators for the presence of vegetables (has_veggies) and whether the recipe is tagged as healthy (is_healthy). 
 
 Here are the relevant columns of the processed dataframe:
 
@@ -70,17 +70,36 @@ This is the first few rows of my cleaned dataset:
 ### Univariate Analysis
 Here is a plot that displays the distribution of average recipe ratings:
 <iframe src="assets/univariate.html" width="800" height="600" frameborder="0" ></iframe>
-
 The histogram shows the distribution of average recipe ratings. Most recipes have an average rating of 4 or higher, indicating that users generally rate recipes quite positively. The mode of the distribution is at a rating of 5, suggesting that a significant number of recipes receive the highest possible rating.
-
-
 
 ### Bivariate Analysis
 Here is a plot that displays the relationship between calories and average ratings:
 <iframe src="assets/bivar_cals.html" width="800" height="600" frameborder="0" ></iframe>
-
 The scatter plot illustrates the relationship between the number of calories and the average ratings of recipes. While there is some spread in the data, there does not appear to be a strong correlation between calories and average ratings. Recipes with a wide range of calorie content can still achieve high ratings, suggesting that factors other than calorie count may play a more significant role in user ratings.
 
+### Interesting Aggregates
+<!-- TODO -->
+
+## Assessment of Missingness
+One of the columns in the dataset with significant missing values is the `rating` column. Another is the `description` column. In this section we will be exploring the missingness in the data.
+
+### NMAR Analysis
+Descriptions are often provided when the contributor has something notable or specific to say about the recipe. If contributors feel that the recipe is self-explanatory, straightforward, or lacks unique characteristics, they might omit the description. This decision is influenced by the contributor's subjective judgment, making the missingness dependent on the complexity and the nature of the recipe.
+
+### Missingness Dependency
+We conducted permutation tests to examine whether the missingness in the `avg_rating` column depends on `calories` and `sodium`
+
+*Testing Dependency on calories:*
+*Null Hypothesis:* The missingness of `avg_rating` does not depend on `calories`.
+*Alternative Hypothesis:* The missingness of `avg_rating` depends on `calories`.
+*Test Statistic:* Absolute difference in mean `calories` between groups with and without missing `avg_rating`.
+*Results:* Observed Difference: 102.607, P-value: 0.0
+
+*Testing Dependency on sodium:*
+*Null Hypothesis:* The missingness of `avg_rating` does not depend on `sodium`.
+*Alternative Hypothesis:* The missingness of `avg_rating` depends on `sodium`.
+*Test Statistic:* Absolute difference in mean `sodium` between groups with and without missing `avg_rating`.
+*Results:* Observed Difference: -0.232, P-value: 0.903
 
 
 
