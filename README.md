@@ -69,7 +69,7 @@ This is the first few rows of my cleaned dataset:
 
 ### Univariate Analysis
 Here is a plot that displays the distribution of average recipe ratings:
-<iframe src="/Users/tanishaiyer/Documents/DSC/recipe-ratings-analysis.html" width="800" height="600" frameborder="0" ></iframe>
+<iframe src="/Users/tanishaiyer/Documents/DSC/recipe-ratings-analysis/assets/univariate.html" width="800" height="600" frameborder="0" ></iframe>
 
 The histogram shows the distribution of average recipe ratings. Most recipes have an average rating of 4 or higher, indicating that users generally rate recipes quite positively. The mode of the distribution is at a rating of 5, suggesting that a significant number of recipes receive the highest possible rating.
 
