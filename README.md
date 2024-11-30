@@ -81,7 +81,7 @@ The histogram shows the distribution of average recipe ratings. Most recipes hav
 
 Here is a plot that displays the relationship between calories and average ratings:
 
-<iframe src="assets/bivar_cals.html" width="700" height="450" frameborder="0" ></iframe> 
+<iframe src="assets/bivar_cals.html" width="650" height="400" frameborder="0" ></iframe> 
 
 The scatter plot illustrates the relationship between the number of calories and the average ratings of recipes. While there is some spread in the data, there does not appear to be a strong correlation between calories and average ratings. Recipes with a wide range of calorie content can still achieve high ratings, suggesting that factors other than calorie count may play a more significant role in user ratings.
 
@@ -113,7 +113,7 @@ We conducted permutation tests to evaluate whether the missingness in the avg_ra
 
 The histogram below shows the empirical distribution of the test statistic for the permutation test on calories. The observed statistic is marked with a red dashed line. The observed difference falls outside the bulk of the permutation differences, suggesting that there is a significant dependency of the missingness of avg_rating on the calories column.
 
-<iframe src="assets/cal_missing.html" width="700" height="450" frameborder="0" ></iframe>
+<iframe src="assets/cal_missing.html" width="650" height="400" frameborder="0" ></iframe>
 
 **Testing Dependency on sodium:**
 
@@ -127,7 +127,7 @@ The histogram below shows the empirical distribution of the test statistic for t
 
 The histogram below shows the empirical distribution of the test statistic under the null hypothesis. The observed difference, marked by the red dashed line, lies well within the bulk of the null distribution, suggesting no significant dependency between the missingness in avg_rating and the sodium column. Therefore, we fail to reject the null hypothesis for sodium.
 
-<iframe src="assets/sodium_missing.html" width="700" height="450" frameborder="0" ></iframe>
+<iframe src="assets/sodium_missing.html" width="650" height="400" frameborder="0" ></iframe>
 
 **Based on the results of the permutation tests:**
 The missingness in `avg_rating` is significantly dependent on `calories` however, there was no significant dependency between the missingness in `avg_rating` and `sodium`.
