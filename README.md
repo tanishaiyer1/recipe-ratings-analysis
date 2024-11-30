@@ -168,12 +168,11 @@ These additional features are well-suited to the prediction task because they ca
 The final model uses a Random Forest Regressor, a flexible and robust algorithm capable of capturing complex feature interactions and nonlinear relationships. We tuned hyperparameters using a Grid Search with 3-fold cross-validation to find the best combination of:
 - `n_estimators` (50, 100), controlling the number of trees in the forest.
 - `max_depth` (None, 10, 20), limiting the depth of individual trees to avoid overfitting.
-- `max_features` ('sqrt', 'log2', None), determining the number of features considered for splits at each node.
 
 The final model's performance metrics improved significantly over the baseline:
-- Mean Squared Error (MSE): 0.2022
-- R-squared: 0.1576
-- Mean Absolute Error (MAE): 0.2835
+- Mean Squared Error (MSE): 0.1955
+- R-squared: 0.1856
+- Mean Absolute Error (MAE): 0.2542
 
 These improvements in performance metrics, particularly the higher R-squared value, indicate that the final model better captures the variability in average ratings. This enhancement is likely due to the inclusion of more informative features and the implementation of the Random Forest Regressor algorithm. The final model's ability to account for complex interactions between variables has resulted in more accurate predictions. However, while there is a noticeable improvement, the overall metrics still suggest that the model is not exceptionally strong. This observation potentially implies that the average rating of a recipe is not predominantly influenced by its nutritional factors alone. Additional aspects, such as taste, ease of preparation, and user experience, might play a more significant role in determining the overall ratings.
 
