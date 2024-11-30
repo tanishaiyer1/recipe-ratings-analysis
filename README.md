@@ -167,7 +167,7 @@ These additional features are well-suited to the prediction task because they ca
 
 The final model uses a Random Forest Regressor, a flexible and robust algorithm capable of capturing complex feature interactions and nonlinear relationships. We tuned hyperparameters using a Grid Search with 3-fold cross-validation to find the best combination of:
 - `n_estimators` (50, 100), controlling the number of trees in the forest.
-- `max_depth` (None, 10, 20), limiting the depth of individual trees to avoid overfitting.
+- `max_depth` (10, 20, 30), limiting the depth of individual trees to avoid overfitting.
 
 The final model's performance metrics improved significantly over the baseline:
 - Mean Squared Error (MSE): 0.1955
