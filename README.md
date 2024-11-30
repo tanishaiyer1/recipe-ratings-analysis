@@ -2,6 +2,7 @@
 **By: Tanisha Iyer and Reva Agrawal**
 
 ## Introduction 
+
 Whether we are cooking dinner at home or looking up recipes for special occasions, everyone has their go-to favorites and opinions about what makes a dish great. In today's health-conscious world, understanding the factors that influence our food choices is more important than ever. While taste and personal preference play significant roles, the nutritional content of a recipe can also impact its popularity. The central question of our project is: **"Do the nutritional factors of a recipe significantly influence its average rating?"** By investigating this question, we can gain valuable insights into the interplay between health and taste. Our findings could empower individuals to make informed dietary choices, inspire recipe developers to create healthier and more appealing dishes, and guide the food industry in developing innovative and nutritious products.
 
 We are working with two datasets for this project. The first, 'Recipes', contains different recipies and information about them, and the second, 'Ratings', has the ratings and reviews of the recipies. Below are the columns of the two datasets:
@@ -33,10 +34,10 @@ We are working with two datasets for this project. The first, 'Recipes', contain
 
 
 ## Data Cleaning and Exploratory Data Analysis
+
 We first had to clean the raw data. We started by merging the two datasets on id and recipe_id. We then handled all missing rating by replacing all zero ratings with NaN values. Next we Converted the nutrition column from a string representation of a list to individual numerical columns for each nutrient and then removed the original nutrition column. We also calculated the average rating for each recipe and added it as a new column. Next we added binary indicators for the presence of vegetables (has_veggies) and whether the recipe is tagged as healthy (is_healthy). 
 
 Here are the relevant columns of the processed dataframe:
-
 
 | Column        | Description                                                |
 | ------------- | ---------------------------------------------------------- |
@@ -69,23 +70,34 @@ This is the first few rows of my cleaned dataset:
 
 
 ### Univariate Analysis
+
 Here is a plot that displays the distribution of average recipe ratings:
-<iframe src="assets/univariate.html" width="800" height="600" frameborder="0" ></iframe> The histogram shows the distribution of average recipe ratings. Most recipes have an average rating of 4 or higher, indicating that users generally rate recipes quite positively. The mode of the distribution is at a rating of 5, suggesting that a significant number of recipes receive the highest possible rating.
+
+<iframe src="assets/univariate.html" width="800" height="600" frameborder="0" ></iframe>
+
+The histogram shows the distribution of average recipe ratings. Most recipes have an average rating of 4 or higher, indicating that users generally rate recipes quite positively. The mode of the distribution is at a rating of 5, suggesting that a significant number of recipes receive the highest possible rating.
 
 ### Bivariate Analysis
+
 Here is a plot that displays the relationship between calories and average ratings:
-<iframe src="assets/bivar_cals.html" width="800" height="600" frameborder="0" ></iframe> The scatter plot illustrates the relationship between the number of calories and the average ratings of recipes. While there is some spread in the data, there does not appear to be a strong correlation between calories and average ratings. Recipes with a wide range of calorie content can still achieve high ratings, suggesting that factors other than calorie count may play a more significant role in user ratings.
+
+<iframe src="assets/bivar_cals.html" width="800" height="600" frameborder="0" ></iframe> 
+
+The scatter plot illustrates the relationship between the number of calories and the average ratings of recipes. While there is some spread in the data, there does not appear to be a strong correlation between calories and average ratings. Recipes with a wide range of calorie content can still achieve high ratings, suggesting that factors other than calorie count may play a more significant role in user ratings.
 
 ### Interesting Aggregates
 <!-- TODO -->
 
 ## Assessment of Missingness
+
 One of the columns in the dataset with significant missing values is the `rating` column. Another is the `description` column. In this section we will be exploring the missingness in the data.
 
 ### NMAR Analysis
+
 Descriptions are often provided when the contributor has something notable or specific to say about the recipe. If contributors feel that the recipe is self-explanatory, straightforward, or lacks unique characteristics, they might omit the description. This decision is influenced by the contributor's subjective judgment, making the missingness dependent on the complexity and the nature of the recipe.
 
 ### Missingness Dependency
+
 We conducted permutation tests to evaluate whether the missingness in the avg_rating column depends on the `calories` and `sodium` columns in our dataset. The permutation tests simulate the null hypothesis that there is no relationship between the missingness in avg_rating and the respective column by randomly shuffling the data and recalculating the test statistic.
 
 
@@ -100,6 +112,7 @@ We conducted permutation tests to evaluate whether the missingness in the avg_ra
 **Results:** Observed Difference: 102.607, P-value: 0.0
 
 The histogram below shows the empirical distribution of the test statistic for the permutation test on calories. The observed statistic is marked with a red dashed line. The observed difference falls outside the bulk of the permutation differences, suggesting that there is a significant dependency of the missingness of avg_rating on the calories column.
+
 <iframe src="assets/cal_missing.html" width="800" height="600" frameborder="0" ></iframe>
 
 **Testing Dependency on sodium:**
@@ -113,6 +126,7 @@ The histogram below shows the empirical distribution of the test statistic for t
 **Results:** Observed Difference: -0.232, P-value: 0.903
 
 The histogram below shows the empirical distribution of the test statistic under the null hypothesis. The observed difference, marked by the red dashed line, lies well within the bulk of the null distribution, suggesting no significant dependency between the missingness in avg_rating and the sodium column. Therefore, we fail to reject the null hypothesis for sodium.
+
 <iframe src="assets/sodium_missing.html" width="800" height="600" frameborder="0" ></iframe>
 
 **Based on the results of the permutation tests:**
@@ -120,8 +134,10 @@ The missingness in `avg_rating` is significantly dependent on `calories` however
 
 
 ## Hypothesis Testing
+<!-- TODO -->
 
 ## Framing a Prediction Problem
+
 Our goal is to predict the average rating (`avg_rating`) of recipes based on their attributes, making this a regression problem as `avg_rating` is a continuous variable. By accurately forecasting `avg_rating`, which directly measures a recipe's perceived quality and popularity among users, we can determine which attributes influence user preferences. This understanding allows recipe creators to tailor their offerings to better meet user expectations and improve overall satisfaction.
 
 To evaluate our model, we use Mean Squared Error (MSE) as the primary metric, along with R-squared and Mean Absolute Error (MAE) for additional insights. MSE is preferred because it is more sensitive to larger errors, making it effective for identifying models with significant prediction inaccuracies. R-squared provides a measure of how well the model explains the variability of the response data, and MAE offers an easily interpretable magnitude of errors. Together, these metrics give a well-rounded assessment of our model's prediction accuracy.
@@ -131,6 +147,7 @@ Our baseline model uses three features: `sodium`, `is_healthy`, and `has_veggies
 By integrating these improved features and fine-tuning the hyperparameters for a Random Forest Regressor, the final model can better capture the complex interactions between recipe attributes. This approach leads to more accurate predictions of user ratings. The progression from a simple to a more sophisticated model highlights how incorporating meaningful features and advanced techniques can significantly enhance predictive performance in real-world scenarios.
 
 ## Baseline Model
+
 The baseline model predicts a recipe's average rating (`avg_rating`) using three features: `sodium`, `is_healthy`, and `has_veggies`. Among these, `sodium` is a quantitative variable representing the amount of `sodium` in a recipe. The other two, `is_healthy` and `has_veggies`, are nominal variables indicating whether a recipe has the tag 'healthy' and whether it has the tag 'vegetables', respectively. To encode the nominal variables, we used a OneHotEncoder as part of a ColumnTransformer. This ensures that the categorical variables are transformed into binary indicator variables suitable for regression modeling.
 
 The model's performance metrics are as follows:
@@ -141,6 +158,7 @@ The model's performance metrics are as follows:
 Based on these metrics, the baseline model has limited predictive power, as indicated by the low R-squared value. This suggests that the model does not explain much of the variability in the average ratings. While the baseline model provides a foundation, its performance indicates there is significant room for improvement.
 
 ## Final Model
+
 To enhance the model, we added the following features:
 1. **Saturated Fat** (`saturated_fat`): A quantitative measure of fat content, which could influence health-conscious users' perceptions of a recipe.
 2. **Health Score** (`health_score`): A composite score calculated using binary indicators for low sodium, low sugar, high protein, and low calorie content. This feature summarises multiple health-related aspects into a single variable that could strongly correlate with user preferences.
