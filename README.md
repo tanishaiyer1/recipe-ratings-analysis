@@ -86,7 +86,37 @@ Here is a plot that displays the relationship between calories and average ratin
 The scatter plot illustrates the relationship between the number of calories and the average ratings of recipes. While there is some spread in the data, there does not appear to be a strong correlation between calories and average ratings. Recipes with a wide range of calorie content can still achieve high ratings, suggesting that factors other than calorie count may play a more significant role in user ratings.
 
 ### Interesting Aggregates
-<!-- TODO -->
+Here will will dive deep into grouped insights based on recipe tags.
+We grouped recipes based on whether they were tagged as healthy and/or contained vegetables. Below is the grouped table displaying the average calories, average ratings, and the total number of recipes for each combination:
+
+**Grouped Table: Healthy and Veggie Tags**
+
+|   is_healthy |   has_veggies |   avg_calories |   avg_rating |   recipe_count |
+|-------------:|--------------:|---------------:|-------------:|---------------:|
+|            0 |             0 |        463.463 |      4.66968 |         147932 |
+|            0 |             1 |        358.557 |      4.72039 |          39372 |
+|            1 |             0 |        366.435 |      4.64835 |          33255 |
+|            1 |             1 |        251.325 |      4.69221 |          13870 |
+
+Significance:
+
+Recipes tagged as healthy but without vegetables had an average calorie count of 366.43 and an average rating of 4.65.
+Recipes with vegetables, whether healthy or not, had slightly higher average ratings compared to those without vegetables.
+The inclusion of vegetables tends to lower calorie count and improve rating, demonstrating the impact of this tag on recipe attributes.
+
+To further explore the relationship between these two tags, the pivot table below highlights the average calories and ratings for each combination of healthy and veggie tags:
+
+**Pivot Table: Healthy and Veggie Tags**
+
+|   ('avg_calories', 0) |   ('avg_calories', 1) |   ('avg_rating', 0) |   ('avg_rating', 1) |
+|----------------------:|----------------------:|--------------------:|--------------------:|
+|               463.463 |               358.557 |             4.66968 |             4.72039 |
+|               366.435 |               251.325 |             4.64835 |             4.69221 |
+
+Significance:
+
+Recipes marked as both healthy and containing vegetables have higher average ratings (4.69) and lowest average calorie counts (251.33) compared to recipes without these tags.
+Recipes lacking both tags tend to have higher calorie counts but lower ratings, indicating a potential trade-off between healthiness and popularity.
 
 ## Assessment of Missingness
 
@@ -134,7 +164,28 @@ The missingness in `avg_rating` is significantly dependent on `calories` however
 
 
 ## Hypothesis Testing
-<!-- TODO -->
+
+We performed a hypothesis test to determine whether the presence of the "healthy" tag significantly impacts the average ratings of recipes. Below are the details of the test:
+
+**Hypotheses:**
+
+**Null Hypothesis:** The average ratings of recipes with the "healthy" tag are not significantly different from those without the tag.
+
+**Alternative Hypothesis:** Recipes with the "healthy" tag have significantly different average ratings compared to those without the tag.
+
+**Test Statistic:** The difference in mean average ratings between recipes with and without the "healthy" tag.
+
+**Significance level:** 0.05
+
+**Results:** Observed Difference: -0.019, P-value: 0.0
+
+**Conclusion:** Since the p-value is less than 0.05, we reject the null hypothesis and conclude that the "healthy" tag significantly impacts recipe ratings.
+
+The histogram below shows the empirical distribution of the test statistic from the permutation test, with the observed difference marked in red:
+<iframe src="assets/fig_healthy.html" width="650" height="400" frameborder="0" ></iframe>
+
+Significance:
+This test enhances our research argument by exploring how health-related tags influence recipe ratings, providing insights into user preferences regarding healthy recipes.
 
 ## Framing a Prediction Problem
 
@@ -177,6 +228,29 @@ The final model's performance metrics improved significantly over the baseline:
 These improvements in performance metrics, particularly the higher R-squared value, indicate that the final model better captures the variability in average ratings. This enhancement is likely due to the inclusion of more informative features and the implementation of the Random Forest Regressor algorithm. The final model's ability to account for complex interactions between variables has resulted in more accurate predictions. However, while there is a noticeable improvement, the overall metrics still suggest that the model is not exceptionally strong. This observation potentially implies that the average rating of a recipe is not predominantly influenced by its nutritional factors alone. Additional aspects, such as taste, ease of preparation, and user experience, might play a more significant role in determining the overall ratings.
 
 ## Fairness Analysis
+In this analysis, we assessed whether the performance of our final model was fair across two groups: 
+1. Recipes tagged as healthy (is_healthy=1)
+2. Recipes not tagged as healthy (is_healthy=0)
+
+**Evaluation Metric:** We used Mean Squared Error (MSE) to measure the model's performance for each group.
+
+**Hypotheses:**
+
+**Null Hypothesis:** The model performs equally well for both groups, and any differences in MSE are due to random chance.
+
+**Alternative Hypothesis:** The model performs differently for the two groups, and the difference in MSE is not due to random chance.
+
+**Results:**
+MSE for Healthy Recipes: 0.1970
+MSE for Non-Healthy Recipes: 0.1951
+Observed Difference: 0.0019
+P-value: 0.8840
+
+**Conclusion:**
+Since the p-value ≥ 0.05, we fail to reject the null hypothesis, suggesting that the observed difference in performance is due to random chance.
+
+Below is the empirical distribution of the difference in MSE between the two groups from our permutation test. The observed difference is marked in red:
+<iframe src="assets/fig_fairness.html" width="650" height="400" frameborder="0" ></iframe>
 
 
 
