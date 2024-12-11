@@ -249,6 +249,9 @@ P-value: 0.8840
 **Conclusion:**
 Since the p-value ≥ 0.05, we fail to reject the null hypothesis, suggesting that the observed difference in performance is due to random chance.
 
+The fairness analysis highlights the importance of evaluating machine learning models for equitable performance across different subgroups. By comparing the Mean Squared Error (MSE) for healthy and non-healthy recipes, we assessed whether the model predicts ratings fairly across these categories. The observed difference in MSE was 0.0019, with a p-value of 0.8840, indicating no statistically significant disparity between the groups. Consequently, we fail to reject the null hypothesis, suggesting that any differences in performance are likely due to random variation. This analysis reinforces the fairness of our model, ensuring it does not favour one group over another and supports the development of trustworthy and unbiased predictive systems.
+
+
 Below is the empirical distribution of the difference in MSE between the two groups from our permutation test. The observed difference is marked in red:
 <iframe src="assets/fig_fairness.html" width="650" height="400" frameborder="0" ></iframe>
 
